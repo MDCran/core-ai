@@ -33,6 +33,14 @@ npm run check
 npm run build
 ```
 
+## Release boundary
+
+This public package contains reusable safety and authorization contracts only.
+It has no production prompts, customer data, provider credentials, or runtime
+configuration. Product deployments pair `main` with [coretv.co](https://coretv.co)
+and `devel` with [dev.coretv.co](https://dev.coretv.co); those environment
+values remain outside this package.
+
 ## Ownership
 
 Built and maintained by [MDCran](https://github.com/MDCran).
