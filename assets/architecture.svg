@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Core AI package boundary</title><desc id="desc">Public AI contracts route requests through private application policy and provider adapters.</desc>
+  <rect width="1200" height="630" fill="#0b0b0d"/><g font-family="Arial, sans-serif" fill="#fff">
+  <text x="80" y="94" font-size="46" font-weight="700">Core AI</text><text x="80" y="132" font-size="22" fill="#a8a8b3">Public contracts for safer conversation features</text>
+  <rect x="80" y="210" width="290" height="190" rx="20" fill="#15151a" stroke="#3a3a44"/><text x="116" y="280" font-size="28" font-weight="700">Applications</text><text x="116" y="322" font-size="18" fill="#b5b5c0">Chat · Voice · Search</text>
+  <rect x="455" y="210" width="290" height="190" rx="20" fill="#1d1020" stroke="#ff3d70"/><text x="491" y="280" font-size="28" font-weight="700">core-ai</text><text x="491" y="322" font-size="18" fill="#f2b4c5">Safety · Usage contracts</text>
+  <rect x="830" y="210" width="290" height="190" rx="20" fill="#15151a" stroke="#3a3a44"/><text x="866" y="280" font-size="28" font-weight="700">Private runtime</text><text x="866" y="322" font-size="18" fill="#b5b5c0">Policy · Providers · Data</text>
+  <path d="M370 305h82m-18-14 18 14-18 14M745 305h82m-18-14 18 14-18 14" stroke="#ff3d70" stroke-width="5" fill="none"/></g>
+</svg>
