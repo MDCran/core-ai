@@ -1,6 +1,8 @@
 # Core AI
 
-![Core AI package boundary](assets/architecture.svg)
+![CORE robot protecting a conversation channel before it reaches a private AI runtime](assets/readme-hero.png)
+
+Chat, voice, and search applications use Core AI's safety and usage contracts before requests reach private policy, provider, or data services.
 
 Core AI is a small TypeScript package for provider-neutral conversation safety and metered-usage contracts. It is designed to be used by web apps, workers, and voice services without exposing production prompts, customer data, or provider credentials.
 
