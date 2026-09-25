@@ -26,3 +26,11 @@ The checkout does not persist credentials. There are no variable groups, provide
 4. Retain the disabled GitHub workflow as equivalence evidence. Local test success is not Azure hosted proof or production readiness.
 
 CI runs for all PR target branches and pushes to main, preserving the former trigger coverage. This pipeline intentionally has no deployment stage. Existing release authorization remains separate.
+
+## Saved Azure definition — September 25, 2026
+
+Definition **MDCran.core-ai**, ID **4**, is saved in the existing private CORE Engineering project: [Azure pipeline](https://dev.azure.com/coretv/CORE%20Engineering/_build?definitionId=4). It uses the existing GitHub connection and this branch's reviewed YAML.
+
+The authenticated Azure trigger view showed pull request validation enabled, YAML overrides off, and **Build pull requests from forks** unchecked and disabled by inherited policy. No fork access, provider secrets, privileged connection, deployment or package publication was added.
+
+Hosted verification of this initial migration remains pending. Old required check contexts remain in place until successful Azure PR evidence is observed and retained. The definition exists; this is not a claim that its checks passed or its changes were deployed.
