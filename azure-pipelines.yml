@@ -1,0 +1,65 @@
+# Azure owns execution. Retained GitHub Actions workflows are disabled history.
+# Azure project settings must reject fork builds; YAML cannot secure an untrusted YAML edit.
+# This pipeline has no deployment, publishing, or provider credentials.
+trigger:
+  batch: true
+  branches:
+    include: [main]
+pr:
+  autoCancel: true
+  branches:
+    include: ['*']
+pool:
+  vmImage: ubuntu-24.04
+jobs:
+  - job: source_policy
+    displayName: Source trust policy
+    steps:
+      - checkout: none
+      - bash: |
+          set -euo pipefail
+          if [[ "$CORE_CI_REASON" == "PullRequest" && "$CORE_CI_FORK" != "False" && "$CORE_CI_FORK" != "false" ]]; then
+            echo "Fork or unknown-origin PRs require a separate credential-free review path." >&2
+            exit 1
+          fi
+        displayName: Refuse fork and unknown-origin PRs
+        env:
+          CORE_CI_REASON: $(Build.Reason)
+          CORE_CI_FORK: $(System.PullRequest.IsFork)
+  - job: verify
+    displayName: AI contract typecheck and build
+    dependsOn: source_policy
+    timeoutInMinutes: 30
+    steps:
+      - checkout: self
+        clean: true
+        fetchDepth: 0
+        persistCredentials: false
+      - task: UseNode@1
+        inputs:
+          version: '24.15.0'
+        displayName: Use supported Node 24.15.0
+      - bash: node scripts/ci/source-receipt.mjs
+        displayName: Bind exact checked-out source
+        env:
+          CORE_CI_REPOSITORY: $(Build.Repository.Name)
+          CORE_CI_SELF_SHA: $(Build.SourceVersion)
+          CORE_CI_REASON: $(Build.Reason)
+          CORE_CI_PR_SOURCE_SHA: $(System.PullRequest.SourceCommitId)
+          CORE_CI_SOURCE_RECEIPT: $(Build.ArtifactStagingDirectory)/source-receipt.json
+      - bash: |
+          set -euo pipefail
+          node scripts/ci/validate-pipeline.mjs
+          node --test scripts/ci/*.test.mjs
+          npm ci
+          npm run check
+          npm run build
+        displayName: Preserve existing verification gates
+        env:
+          CI: 'true'
+      - task: PublishPipelineArtifact@1
+        condition: always()
+        inputs:
+          targetPath: $(Build.ArtifactStagingDirectory)
+          artifact: core-ai-verification
+        displayName: Retain exact-source evidence, including failures
